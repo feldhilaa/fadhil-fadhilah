@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Undangan Pernikahan</title>
+
+  
+<style>
+.dear{
+  color:#8A9560;
+}
+
+.nama-tamu{
+  color:#6F7D47;
+}
+
+.btn-undangan{
+  background:#8A9560;
+  color:white;
+  border:none;
+}
+/* ==========================================
+   RESET DASAR
+========================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:url("body.webp") center/cover fixed;
+font-family:sans-serif;
+color:white;
+overflow-x:hidden;
+
+}
+
+/* ==========================================
+   SECTION
+========================================== */
+
+.page{
+
+position:relative;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+
+}
+
+.page video{
+
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+
+}
+
+.overlay{
+
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:-1;
+
+}
+
+.content{
+  width:100%;
+  max-width:600px;
+  text-align:center;
+  padding-top:480px;
+}
+  
+.content>*{
+margin:12px 0;
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+button,a.btn{
+
+padding:12px 24px;
+border:none;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+
+}
+
+/* ==========================================
+   MUSIC
+========================================== */
+
+#musicBtn{
+
+position:fixed;
+top:15px;
+right:15px;
+z-index:1000;
+
+}
+
+/* ==========================================
+   COUNTDOWN
+========================================== */
+
+.countdown{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:480px;
+
+}
+
+.box{
+  background:#6F7D47;
+  color:white;
+  padding:15px 10px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow: 0 8px 20px rgba(70,85,35,.18);
+}
+
+.box h3{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.box p{
+  font-size:13px;
+  color:#F7F6EE;
+}
+
+/* ==========================================
+   RSVP
+========================================== */
+
+form{
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+input,select,textarea{
+
+padding:12px;
+width:100%;
+
+}
+
+/* ==========================================
+   NAVIGASI BAWAH
+========================================== */
+
+.bottom-nav{
+
+position:fixed;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:10px;
+padding:12px 18px;
+background:rgba(255,255,255,.9);
+border-radius:999px;
+z-index:1000;
+
+}
+
+.bottom-nav img{
+
+width:24px;
+height:24px;
+
+}
+.nav img{
+  width:24px;
+  height:24px;
+}
+
+.btn-lokasi{
+  display:inline-block;
+  background:#7A8750;
+  color:white !important;
+  text-decoration:none;
+  padding:15px 38px;
+  border-radius:999px;
+  font-size:18px;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(70,85,35,.18);
+}
+
+</style>
+  
+</head>
+
+<body>
+
+<!-- ==========================================
+AUDIO
+========================================== -->
+
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">▶ Musik</button>
+
+<!-- ==========================================
+1. COVER
+========================================== -->
+
+<section class="page" id="cover">
+
+<video autoplay muted loop playsinline>
+<source src="1.mp4" type="video/mp4">
+</video>
+
+
+
+<div class="content">
+
+
+
+<p class="dear">Dear</p>
+
+<h2 id="namaTamu" class="nama-tamu">Tamu Undangan</h2>
+
+<br>
+
+<button class="btn-undangan" onclick="bukaUndangan()">
+Buka Undangan
+</>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+2. OPENING
+========================================== -->
+
+<section class="page" id="opening">
+
+<video autoplay muted loop playsinline>
+<source src="2.mp4" type="video/mp4">
+</video>
+
+
+
+</section>
+
+<!-- ==========================================
+3. NAMA PENGANTIN
+========================================== -->
+
+<section class="page" id="pengantin">
+
+<video autoplay muted loop playsinline>
+<source src="3.mp4" type="video/mp4">
+</video>
+
+</section>
+
+<!-- ==========================================
+4. INFORMASI ACARA
+========================================== -->
+<section class="page" id="acara">
+
+<video autoplay muted loop playsinline>
+<source src="4.mp4" type="video/mp4">
+</video>
+
+<div class="countdown">
+
+<div class="box">
+<h3 id="hari">0</h3>
+<p>Hari</p>
+</div>
+
+<div class="box">
+<h3 id="jam">0</h3>
+<p>Jam</p>
+</div>
+
+<div class="box">
+<h3 id="menit">0</h3>
+<p>Menit</p>
+</div>
+
+<div class="box">
+<h3 id="detik">0</h3>
+<p>Detik</p>
+</div>
+
+</div>
+
+<p id="statusAcara"></p>
+
+</div>
+</section>
+
+<!-- ==========================================
+5. COUNTDOWN
+========================================== -->
+
+<section class="page" id="countdownSection">
+
+<video autoplay muted loop playsinline>
+<source src="5.mp4" type="video/mp4">
+</video>
+<div class="content">
+
+<a class="btn-lokasi"
+href="https://maps.google.com/?q=RT+03+RW+07+Desa+Alamendah+Rancabali+Bandung"
+target="_blank"
+rel="noopener">
+Lihat Lokasi
+</a>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+6. RSVP
+========================================== -->
+
+<section class="page" id="rsvp">
+
+<video autoplay muted loop playsinline>
+<source src="7.mp4" type="video/mp4">
+</video>
+
+
+<div class="content">
+
+<h2>Konfirmasi Kehadiran</h2>
+
+<form id="rsvpForm">
+
+<input
+type="text"
+placeholder="Nama"
+required>
+
+<select required>
+
+<option value="">
+Pilih Kehadiran
+</option>
+
+<option>Hadir</option>
+
+<option>Tidak Hadir</option>
+.
+</select>
+
+<input
+type="number"
+placeholder="Jumlah Tamu">
+
+<textarea
+placeholder="Ucapan"></textarea>
+
+<button type="submit">
+Kirim RSVP
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+7. GIFT
+========================================== -->
+
+<section class="page" id="gift">
+
+<video autoplay muted loop playsinline>
+<source src="7.mp4" type="video/mp4">
+</video>
+
+<div class="content">
+
+<h2>Amplop Digital</h2>
+
+<p>Bank BCA</p>
+
+<h3>1234567890</h3>
+
+<p>a.n. Fadhil</p>
+
+<button onclick="copyRekening()">
+Salin Nomor Rekening
+</button>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+8. CLOSING
+========================================== -->
+
+<section class="page" id="closing">
+
+<video autoplay muted loop playsinline>
+<source src="7.mp4" type="video/mp4">
+</video>
+
+<div class="content">
+
+<h2>Terima Kasih</h2>
+
+<p>
+Jazakumullahu Khairan
+atas doa dan kehadirannya.
+</p>
+
+<h3>Fadhil & Fadhilah</h3>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+NAVIGASI BAWAH
+========================================== -->
+
+<div class="bottom-nav">
+
+<a href="#cover">
+<img src="home.svg">
+</a>
+
+<a href="#pengantin">
+<img src="heart.svg">
+</a>
+
+<a href="#acara">
+<img src="calendar.svg">
+</a>
+
+<a href="#gift">
+<img src="gift.svg">
+</a>
+
+<a href="#closing">
+<img src="close.svg">
+</a>
+
+</div>
+
+<script>
+
+/* ==========================================
+NAMA TAMU DARI URL
+contoh:
+index.html?to=Felinda
+========================================== */
+
+const params=new URLSearchParams(location.search);
+
+const tamu=params.get("to");
+
+if(tamu){
+
+document.getElementById("namaTamu").innerText=
+decodeURIComponent(tamu);
+
+}
+
+/* ==========================================
+BUKA UNDANGAN
+========================================== */
+
+function bukaUndangan(){
+
+document.getElementById("opening")
+.scrollIntoView();
+
+}
+
+/* ==========================================
+MUSIK
+========================================== */
+
+const music=document.getElementById("bgMusic");
+
+const musicBtn=document.getElementById("musicBtn");
+
+musicBtn.onclick=()=>{
+
+if(music.paused){
+
+music.play();
+
+musicBtn.innerText="❚❚ Musik";
+
+}else{
+
+music.pause();
+
+musicBtn.innerText="▶ Musik";
+
+}
+
+};
+
+/* ==========================================
+COUNTDOWN
+========================================== */
+
+const target=new Date("2026-11-11T08:00:00").getTime();
+
+function updateCountdown(){
+
+const now=Date.now();
+
+const diff=target-now;
+
+if(diff<=0){
+
+document.getElementById("statusAcara")
+.innerText="Acara telah selesai";
+
+["hari","jam","menit","detik"]
+.forEach(id=>{
+
+document.getElementById(id)
+.innerText="0";
+
+});
+
+return;
+
+}
+
+document.getElementById("hari")
+.innerText=Math.floor(diff/86400000);
+
+document.getElementById("jam")
+.innerText=Math.floor(diff%86400000/3600000);
+
+document.getElementById("menit")
+.innerText=Math.floor(diff%3600000/60000);
+
+document.getElementById("detik")
+.innerText=Math.floor(diff%60000/1000);
+
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+/* ==========================================
+COPY REKENING
+========================================== */
+
+function copyRekening(){
+
+navigator.clipboard.writeText("1234567890");
+
+alert("Nomor rekening disalin.");
+
+}
+
+/* ==========================================
+RSVP
+CONTOH GOOGLE APPS SCRIPT
+========================================== */
+
+document.getElementById("rsvpForm")
+.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const data={
+
+nama:this[0].value,
+kehadiran:this[1].value,
+jumlah:this[2].value,
+ucapan:this[3].value
+
+};
+
+/*
+Ganti URL berikut dengan URL
+Google Apps Script milikmu.
+*/
+
+const GAS_URL=
+"https://script.google.com/macros/s/ISI_URL_DISINI/exec";
+
+/*
+Contoh kirim data:
+
+await fetch(GAS_URL,{
+method:"POST",
+body:JSON.stringify(data)
+});
+
+*/
+
+alert("Struktur RSVP sudah siap.");
+
+this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
