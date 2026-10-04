@@ -362,12 +362,23 @@ button[type="submit"]{
   border:2px solid #D8D1B3;
   border-radius:28px;
   padding:30px 22px;
-  margin:380px 0; /* ini nambah jarak atas bawah */
 }
 .btn-salin:hover{
     transform:translateY(-2px);
     background:#7C8852;
 }
+  .rekening p{
+  color:#666;
+  font-size:16px;
+  margin-top:8px;
+    margin : 1px;
+  }
+  .atas-nama{
+  color:#6E7B3C;
+  font-size:17px;
+  font-weight:600;
+  margin:8px 0 18px;
+  }
 /* BUTTON */
 /* ==========================================
    BUTTON
@@ -386,16 +397,41 @@ display:inline-block;
 /* ==========================================
    MUSIC
 ========================================== */
-
 #musicBtn{
-
-position:fixed;
-top:15px;
-right:15px;
-z-index:1000;
-
+  position:fixed;
+  bottom:85px;
+  right:20px;
+  width:60px;
+  height:60px;
+  border:none;
+  border-radius:50%;
+  background:#8A9560;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:28px;
+  cursor:pointer;
+  z-index:1000;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
+.music-icon{
+  position:relative;
+}
+
+#musicBtn.paused .music-icon::after{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:3px;
+  background:#4F5E2A; /* olive sage gelap */
+  border-radius:10px;
+  transform:rotate(-45deg);
+  top:50%;
+  left:50%;
+  translate:-50% -50%;
+}
 /* ==========================================
    COUNTDOWN
 ========================================== */
@@ -453,950 +489,23 @@ input,select,textarea{
   padding:12px;
   width:100%;
 }
-
-/* ==========================================
-   NAVIGASI BAWAH
-========================================== */
-
-.bottom-nav{
-
-position:fixed;
-bottom:15px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:10px;
-padding:12px 18px;
-background:rgba(255,255,255,.9);
-border-radius:999px;
-z-index:1000;
-
-}
-
-.bottom-nav img{
-
-width:24px;
-height:24px;
-
-}
-.nav img{
-  width:24px;
-  height:24px;
-}
-
-.btn-lokasi{
+  .btn-rsvp{
   display:inline-block;
-  background:#7A8750;
-  color:white !important;
+  margin-top:20px;
+  padding:15px 32px;
+  background:#8A9560;
+  color:white;
   text-decoration:none;
-  padding:15px 38px;
-  border-radius:999px;
-  font-size:18px;
-  font-weight:600;
-  box-shadow:0 8px 20px rgba(70,85,35,.18);
-}
-
-</style>
-  
-</head>
-
-<body>
-
-<!-- ==========================================
-AUDIO
-========================================== -->
-
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicBtn">▶ Musik</button>
-
-<!-- ==========================================
-1. COVER
-========================================== -->
-
-<section class="page" id="cover">
-
-<video autoplay muted loop playsinline>
-<source src="1.mp4" type="video/mp4">
-</video>
-
-
-
-<div class="content">
-
-
-
-<p class="dear">Dear</p>
-
-<h2 id="namaTamu" class="nama-tamu">Tamu Undangan</h2>
-
-<br>
-
-<button class="btn-undangan" onclick="bukaUndangan()">
-Buka Undangan
-</>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-2. OPENING
-========================================== -->
-
-<section class="page" id="opening">
-
-<video autoplay muted loop playsinline>
-<source src="2.mp4" type="video/mp4">
-</video>
-
-
-
-</section>
-
-<!-- ==========================================
-3. NAMA PENGANTIN
-========================================== -->
-
-<section class="page" id="pengantin">
-
-<video autoplay muted loop playsinline>
-<source src="3.mp4" type="video/mp4">
-</video>
-
-</section>
-
-<!-- ==========================================
-4. INFORMASI ACARA
-========================================== -->
-<section class="page" id="acara">
-
-<video autoplay muted loop playsinline>
-<source src="4.mp4" type="video/mp4">
-</video>
-
-<div class="countdown">
-
-<div class="box">
-<h3 id="hari">0</h3>
-<p>Hari</p>
-</div>
-
-<div class="box">
-<h3 id="jam">0</h3>
-<p>Jam</p>
-</div>
-
-<div class="box">
-<h3 id="menit">0</h3>
-<p>Menit</p>
-</div>
-
-<div class="box">
-<h3 id="detik">0</h3>
-<p>Detik</p>
-</div>
-
-</div>
-
-<p id="statusAcara"></p>
-
-</div>
-</section>
-
-<!-- ==========================================
-5. COUNTDOWN
-========================================== -->
-
-<section class="page" id="countdownSection">
-
-<video autoplay muted loop playsinline>
-<source src="5.mp4" type="video/mp4">
-</video>
-<div class="content">
-
-<a class="btn-lokasi"
-href="https://maps.google.com/?q=RT+03+RW+07+Desa+Alamendah+Rancabali+Bandung"
-target="_blank"
-rel="noopener">
-Lihat Lokasi
-</a>
-
-</div>
-
-</section>
-
-<!-- ==========================================
-6. RSVP
-========================================== -->
-
-<section class="page" id="rsvp">
-
-  <video autoplay muted loop playsinline>
-  
-    <source src="7.mp4" type="video/mp4">
-  </video>
-
-  <div class="rsvp-content">
-
-    <h2 class="rsvp-title">Berikan Ucapan Anda</h2>
-
-    <p class="rsvp-desc">
-      Silakan memberikan doa terbaik dan ucapan untuk kami.
-      Barakallahu fiikum.
-    </p>
-
-    <h3 class="rsvp-subtitle">Konfirmasi Kehadiran</h3>
-
-    <form id="rsvpForm">
-      <input type="text" id="nama" placeholder="Nama">
-
-      <select id="kehadiran">
-        <option value="Hadir">Hadir</option>
-        <option value="Tidak Hadir">Tidak Hadir</option>
-      </select>
-
-      <textarea id="ucapan" placeholder="Ucapan"></textarea>
-
-      <button type="submit">Kirim RSVP</button>
-    </form>
-
-  </div>
-
-</section>
-
-</section>
-
-<!-- ==========================================
-7. GIFT
-========================================== -->
-<section class="page gift-page" id="gift">
-  <div class="content">
-
-    <div class="kartu-hadiah">
-      <h2 class="judul-hadiah">Hadiah Pernikahan</h2>
-
-      <p class="teks-hadiah">
-        Doa restu dan kehadiran Anda merupakan karunia yang sangat berarti bagi kami.
-        Apabila berkenan memberikan tanda kasih, dapat disampaikan melalui hadiah
-        digital maupun fisik sebagai bentuk doa dan dukungan untuk perjalanan baru kami.
-      </p>
-
-<button class="btn-hadiah" onclick="bukaRekening()">
-    🎁 Klik di Sini
-</button>
-<div class="rekening" id="rekening">
-
-
-  <h4>Bank BCA</h4>
-
-  <div class="no-rek" id="nomorRek">1234567890</div>
-
-  <p>a.n. Muhammad Fadhil Abdillah</p>
-
-  <button class="btn-hadiah" onclick="salinRekening()">
-    📋 Salin Rekening
-  </button>
-
-  <h4 style="margin-top:28px;">Hadiah Fisik</h4>
-
-  <div class="alamat-box" id="alamatHadiah">
-  
-Jl. Raya Menteng No. 25, RT 03/RW 05,
-    Menteng, Bogor Barat, Kota Bogor, Jawa Barat
-  </div>
-
-  <button class="btn-hadiah" onclick="salinAlamat()">
-    📍 Salin Alamat
-  </button>
-
-</div>
-
-    
-
-</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-</section>
-
-<!-- ==========================================
-8. CLOSING
-========================================== -->
-
-<section class="page" id="closing">
-
-<video autoplay muted loop playsinline>
-<source src="6.mp4" type="video/mp4">
-</video>
-
-
-</section>
-
-<!-- ==========================================
-NAVIGASI BAWAH
-========================================== -->
-
-<div class="bottom-nav">
-
-<a href="#cover">
-<img src="home.svg">
-</a>
-
-<a href="#pengantin">
-<img src="heart.svg">
-</a>
-
-<a href="#acara">
-<img src="calendar.svg">
-</a>
-
-<a href="#gift">
-<img src="gift.svg">
-</a>
-
-<a href="#closing">
-<img src="close.svg">
-</a>
-
-</div>
-
-<script>
-
-/* ==========================================
-NAMA TAMU DARI URL
-contoh:
-index.html?to=Felinda
-========================================== */
-
-const params=new URLSearchParams(location.search);
-
-const tamu=params.get("to");
-
-if(tamu){
-
-document.getElementById("namaTamu").innerText=
-decodeURIComponent(tamu);
-
-}
-
-/* ==========================================
-BUKA UNDANGAN
-========================================== */
-
-function bukaUndangan(){
-
-document.getElementById("opening")
-.scrollIntoView();
-
-}
-
-/* ==========================================
-MUSIK
-========================================== */
-
-const music=document.getElementById("bgMusic");
-
-const musicBtn=document.getElementById("musicBtn");
-
-musicBtn.onclick=()=>{
-
-if(music.paused){
-
-music.play();
-
-musicBtn.innerText="❚❚ Musik";
-
-}else{
-
-music.pause();
-
-musicBtn.innerText="▶ Musik";
-
-}
-
-};
-
-/* ==========================================
-COUNTDOWN
-========================================== */
-
-const target=new Date("2026-11-11T08:00:00").getTime();
-
-function updateCountdown(){
-
-const now=Date.now();
-
-const diff=target-now;
-
-if(diff<=0){
-
-document.getElementById("statusAcara")
-.innerText="Acara telah selesai";
-
-["hari","jam","menit","detik"]
-.forEach(id=>{
-
-document.getElementById(id)
-.innerText="0";
-
-});
-
-return;
-
-}
-
-document.getElementById("hari")
-.innerText=Math.floor(diff/86400000);
-
-document.getElementById("jam")
-.innerText=Math.floor(diff%86400000/3600000);
-
-document.getElementById("menit")
-.innerText=Math.floor(diff%3600000/60000);
-
-document.getElementById("detik")
-.innerText=Math.floor(diff%60000/1000);
-
-}
-
-setInterval(updateCountdown,1000);
-
-updateCountdown();
-
-/* ==========================================
-COPY REKENING
-========================================== */
-
-function copyRekening(){
-
-navigator.clipboard.writeText("1234567890");
-
-alert("Nomor rekening disalin.");
-
-}
-
-/* ==========================================
-RSVP
-CONTOH GOOGLE APPS SCRIPT
-========================================== */
-
-document.getElementById("rsvpForm")
-.addEventListener("submit",async function(e){
-
-e.preventDefault();
-
-const data={
-
-nama:this[0].value,
-kehadiran:this[1].value,
-jumlah:this[2].value,
-ucapan:this[3].value
-
-};
-
-/*
-Ganti URL berikut dengan URL
-Google Apps Script milikmu.
-*/
-
-const GAS_URL=
-"https://script.google.com/macros/s/ISI_URL_DISINI/exec";
-
-/*
-Contoh kirim data:
-
-await fetch(GAS_URL,{
-method:"POST",
-body:JSON.stringify(data)
-});
-
-*/
-
-alert("Struktur RSVP sudah siap.");
-
-this.reset();
-
-});
-
-function bukaRekening(){
-    const isi=document.getElementById("rekening");
-    isi.style.display=isi.style.display==="block" ? "none" : "block";
-}
-
-function salinRekening(id){
-    const nomor=document.getElementById(id).innerText;
-    navigator.clipboard.writeText(nomor);
-    alert("Nomor rekening berhasil disalin.");
-}
-
-function salinAlamat(){
-  const alamat = document.getElementById("alamatHadiah").innerText;
-  navigator.clipboard.writeText(alamat);
-  alert("Alamat berhasil disalin.");
-}
-</script>
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-  
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<title>Undangan Pernikahan</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
-
-<style>
-
-  
-.dear{
-  color:#8A9560;
-}
-
-.nama-tamu{
-  color:#6F7D47;
-}
-
-.btn-undangan{
-  background:#8A9560;
-  color:white;
-  border:none;
-}
-  /* ===== HADIAH PERNIKAHAN ===== */
-
-.kartu-hadiah{
-    position: relative;
-    overflow: hidden;
-    background: rgba(253,252,248,.72); /* transparan */
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-
-    border: 4px solid #98A05B;
-    border-radius: 180px 180px 30px 30px;
-
-    max-width: 360px;
-    margin: 40px auto;
-    padding: 40px 22px;
-    text-align: center;
-    box-shadow: 0 12px 25px rgba(0,0,0,.08);
-}
-.judul-hadiah{
-    font-family: "Cormorant Garamond", serif;
-    font-size: 42px;
-    font-weight: 700;
-    color: #8A9560;
-    text-shadow: 2px 3px 6px rgba(0,0,0,.18);
-    line-height: 1.1;
-    margin-bottom: 18px;
-}
-
-.teks-hadiah{
-  color:#666;
-  line-height:1.8;
-  font-size:17px;
-  margin-bottom:28px;
-}
-
-.btn-hadiah{
-  background:#8A9560;
-  color:#fff;
-  border:none;
   border-radius:20px;
-  padding:16px 34px;
-  font-size:20px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 10px 18px rgba(138,149,96,.25);
-}
-
-.btn-hadiah:hover{
-  transform:translateY(-2px);
-}
-
-.rekening{
-  display:none;
-  margin-top:30px;
-  padding-top:15px;
-  animation:muncul .5s ease;
-}
-
-.rekening h3{
-  color:#6E7B3C;
-  font-size:22px;
-  margin-bottom:10px;
-}
-
-.rekening h4{
-  color:#7A8538;
-  font-size:20px;
-  font-weight:bold;
-  text-align:center;
-  margin:22px 0 12px;
-}
-
-.no-rek{
-  font-size:28px;
-  font-weight:bold;
-  color:#6E7B3C;
-}
-
-.btn-salin{
-  margin-top:18px;
-  background:#fff;
-  color:#333;
-  border:none;
-  border-radius:14px;
-  padding:12px 20px;
-}
-.garis-hadiah{
-    border:none;
-    border-top:1px solid #D8DCC0;
-    margin:28px 0;
-}
-
-.alamat-hadiah h3{
-    color:#8A9560;
-    font-size:24px;
-    margin-bottom:10px;
-}
-
-.alamat-hadiah p{
-    color:#666;
-    line-height:1.6;
-    margin-bottom:16px;
-}
-
-.alamat-box{
-  background:#FDFCF8;
-  border:2px solid #D8D1B3;
-  border-radius:22px;
-  padding:22px;
-  color:#555;
-  text-align:center;
-  line-height:1.7;
-  margin:12px 0 22px;
-}
-  .judul-alamat{
-    color:#8A9560;
-    font-size:18px;
-    margin:12px 0 8px;
-  }
-@keyframes muncul{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* ==========================================
-   RESET DASAR
-========================================== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-
-background:url("body.webp") center/cover fixed;
-font-family:sans-serif;
-color:white;
-overflow-x:hidden;
-
-}
-
-/* ==========================================
-   SECTION
-========================================== */
-
-.page{
-
-position:relative;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:40px 20px;
-
-}
-
-.page video{
-
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-
-}
-
-.overlay{
-
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.45);
-z-index:-1;
-
-}
-
-.content{
-  width:100%;
-  max-width:600px;
-  text-align:center;
-  padding-top:480px;
-}
-  
-.content>*{
-margin:12px 0;
-}
-
-  .content{
-  width:100%;
-  max-width:600px;
-  text-align:center;
-  padding-top:480px;
-}
-
-.content>*{
-  margin:12px 0;
-}
-
-.rsvp-content{
-  padding-top:0;
-  text-align:center;
-}
-
-.rsvp-title{
-  font-family:"Berkshire Swash", cursive;
-  font-size:28px;
-  color:#8A9560;
-  margin-bottom:12px;
-  text-shadow:2px 2px 3px rgba(0,0,0,.15);
-}
-
-.rsvp-desc{
-  max-width:320px;
-  margin:0 auto 12px;
-  line-height:1.6;
-  color:#8A9560;
-  font-size:15px;
-}
-
-.rsvp-subtitle{
-  color:#6F7D47;
-  font-size:18px;
-  font-weight:700;
-  margin:18px auto 12px;
-  text-align:center;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:#8A9560;
-}
-
-select{
-  color:#8A9560;
-}
-
-#rsvpForm button{
-  display:block;
-  margin:22px auto 0;
-}
-button[type="submit"]{
-  background:#8A9560;
-  color:white;
-  border:none;
-  padding:16px 40px;
-  border-radius:18px;
-  font-weight:bold;
-  margin-top:15px;
-  box-shadow:0 6px 18px rgba(138,149,96,.3);
-}
-
-  .kartu-hadiah{
-  background:#FDFCF7;
-  border:4px solid #A7AE6C;
-  border-radius:180px 180px 28px 28px;
-  padding:45px 24px;
-  max-width:360px;
-  margin:0 auto;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.judul-amplop{
-  font-size:34px;
-  color:#6E7B3C;
-  margin:16px 0;
-}
-
-.sub-amplop{
-  color:#666;
-  font-size:15px;
-  line-height:1.8;
-  margin-bottom:28px;
-}
-
-.btn-hadiah{
-  background:#8A9560;
-  color:white;
-  border:none;
-  border-radius:14px;
-  padding:14px 28px;
   font-size:17px;
   font-weight:bold;
   box-shadow:0 8px 18px rgba(138,149,96,.28);
-}
-  .gift-page{
-    background: url("8.png") center center/cover no-repeat;
-    padding: 80px 0;
+  transition:.3s;
 }
 
-.gift-page .content{
-    display: flex;
-    justify-content: center;
-  padding: 20px 0 80px;
-}
-
-.kartu-hadiah{
-    background: rgba(253,252,248,.85);
-    border:4px solid #98A05B;
-    border-radius:180px 180px 30px 30px;
-    max-width:360px;
-    margin: 60px auto 40px;
-    padding:40px 22px;
-    box-shadow:0 12px 25px rgba(0,0,0,.08);
-}
-  .btn-salin{
-    background:#8A9560;
-    color:#fff;
-    border:none;
-    border-radius:20px;
-    padding:16px 34px;
-    font-size:20px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 10px 22px rgba(138,149,96,.35);
-    transition:.3s;
-}
-.card-rekening{
-  background:#FDFCF8;
-  border:2px solid #D8D1B3;
-  border-radius:28px;
-  padding:30px 22px;
-  margin:380px 0; /* ini nambah jarak atas bawah */
-}
-.btn-salin:hover{
-    transform:translateY(-2px);
-    background:#7C8852;
-}
-/* BUTTON */
-/* ==========================================
-   BUTTON
-========================================== */
-
-button,a.btn{
-
-padding:12px 24px;
-border:none;
-cursor:pointer;
-text-decoration:none;
-display:inline-block;
-
-}
-
-/* ==========================================
-   MUSIC
-========================================== */
-
-#musicBtn{
-
-position:fixed;
-top:15px;
-right:15px;
-z-index:1000;
-
-}
-
-/* ==========================================
-   COUNTDOWN
-========================================== */
-
-.countdown{
-
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-top:480px;
-
-}
-
-.box{
-  background:#6F7D47;
-  color:white;
-  padding:15px 10px;
-  border-radius:16px;
-  text-align:center;
-  box-shadow: 0 8px 20px rgba(70,85,35,.18);
-}
-
-.box h3{
-  font-size:28px;
-  margin-bottom:5px;
-}
-
-.box p{
-  font-size:13px;
-  color:#F7F6EE;
-}
-
-/* ==========================================
-   RSVP
-========================================== */
-
-form{
-  .rsvp-content{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:18px;
-  width:100%;
-  }
-  margin:0 auto;
-  margin-top:-10px;
-}
-form{
-  width:100%;
-  max-width:400px;
-  margin:0 auto;
-}
-input,select,textarea{
-  padding:12px;
-  width:100%;
+.btn-rsvp:hover{
+  transform:translateY(-2px);
+  background:#7C8852;
 }
 
 /* ==========================================
@@ -1440,7 +549,26 @@ height:24px;
   font-weight:600;
   box-shadow:0 8px 20px rgba(70,85,35,.18);
 }
+#rsvpForm textarea {
+  display: block !important;
+  width: 100%;
+  min-height: 120px;
+  padding: 18px 22px;
+  margin-top: 0;
+  box-sizing: border-box;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: white;
+  color: #6f7d45;
+  font-family: inherit;
+  font-size: 18px;
+  resize: none;
+}
 
+#rsvpForm textarea::placeholder {
+  color: #9aa17b;
+  opacity: 1;
+  }
 </style>
   
 </head>
@@ -1451,11 +579,13 @@ height:24px;
 AUDIO
 ========================================== -->
 
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">
+  <source src="janji suci.mp4" type="audio/mp4">
 </audio>
 
-<button id="musicBtn">▶ Musik</button>
+<button id="musicBtn" class="paused">
+  <span class="music-icon">🎵</span>
+</button>
 
 <!-- ==========================================
 1. COVER
@@ -1475,13 +605,13 @@ AUDIO
 
 <p class="dear">Dear</p>
 
-<h2 id="namaTamu" class="nama-tamu">Tamu Undangan</h2>
+<h2 id="namaTamu" class="nama-tamu">Talitha & mahrom </h2>
 
 <br>
 
 <button class="btn-undangan" onclick="bukaUndangan()">
-Buka Undangan
-</>
+  Buka Undangan
+</button>
 
 </div>
 
@@ -1575,12 +705,9 @@ Lihat Lokasi
 
 <!-- ==========================================
 6. RSVP
-========================================== -->
-
-<section class="page" id="rsvp">
+========================================== --><section class="page" id="rsvp">
 
   <video autoplay muted loop playsinline>
-  
     <source src="7.mp4" type="video/mp4">
   </video>
 
@@ -1589,28 +716,51 @@ Lihat Lokasi
     <h2 class="rsvp-title">Berikan Ucapan Anda</h2>
 
     <p class="rsvp-desc">
-      Silakan memberikan doa terbaik dan ucapan untuk kami.
-      Barakallahu fiikum.
+      Silakan memberikan doa terbaik dan ucapan
+      untuk kami. Barakallahu fiikum.
     </p>
 
-    <h3 class="rsvp-subtitle">Konfirmasi Kehadiran</h3>
+    <form
+      id="rsvpForm"
+      onsubmit="kirimRSVP(event)"
+      action="https://script.google.com/macros/s/AKfycbxak7Ug7lBa8SQ7Tcouy_sgg9JlKYTfs8u9HTUX1gcO_925p2R2SonjK0pAGs96fNWt/exec"
+      method="POST"
+      target="rsvpFrame"
+    >
 
-    <form id="rsvpForm">
-      <input type="text" id="nama" placeholder="Nama">
+      <input
+        type="text"
+        name="nama"
+        placeholder="Nama"
+        required
+      >
 
-      <select id="kehadiran">
+      <select name="kehadiran" required>
+        <option value="" disabled selected>
+          Konfirmasi Kehadiran
+        </option>
         <option value="Hadir">Hadir</option>
         <option value="Tidak Hadir">Tidak Hadir</option>
       </select>
 
-      <textarea id="ucapan" placeholder="Ucapan"></textarea>
+      <textarea
+        name="ucapan"
+        placeholder="Ucapan"
+        required
+      ></textarea>
 
-      <button type="submit">Kirim RSVP</button>
+      <button type="submit" class="btn-rsvp">
+        Kirim RSVP
+      </button>
+
     </form>
 
-  </div>
+    <iframe
+      name="rsvpFrame"
+      style="display:none;"
+    ></iframe>
 
-</section>
+  </div>
 
 </section>
 
@@ -1621,6 +771,7 @@ Lihat Lokasi
   <div class="content">
 
     <div class="kartu-hadiah">
+
       <h2 class="judul-hadiah">Hadiah Pernikahan</h2>
 
       <p class="teks-hadiah">
@@ -1629,46 +780,43 @@ Lihat Lokasi
         digital maupun fisik sebagai bentuk doa dan dukungan untuk perjalanan baru kami.
       </p>
 
-<button class="btn-hadiah" onclick="bukaRekening()">
-    🎁 Klik di Sini
-</button>
-<div class="rekening" id="rekening">
+      <button class="btn-hadiah" onclick="bukaRekening()">
+        🎁 Klik di Sini
+      </button>
 
+      <div class="rekening" id="rekening">
 
-  <h4>Bank BCA</h4>
+        <h4>Bank BCA</h4>
 
-  <div class="no-rek" id="nomorRek">1234567890</div>
+        <div class="no-rek" id="nomorRek">
+          1234567890
+        </div>
 
-  <p>a.n. Muhammad Fadhil Abdillah</p>
+        <p class="atas-nama">a.n. Fadhilah Nurul Ilmi</p>
 
-  <button class="btn-hadiah" onclick="salinRekening()">
-    📋 Salin Rekening
-  </button>
+        <button class="btn-hadiah" onclick="salinRekening()">
+          📋 Salin Rekening
+        </button>
 
-  <h4 style="margin-top:28px;">Hadiah Fisik</h4>
+        <hr class="garis-hadiah">
 
-  <div class="alamat-box" id="alamatHadiah">
-  
-Jl. Raya Menteng No. 25, RT 03/RW 05,
-    Menteng, Bogor Barat, Kota Bogor, Jawa Barat
-  </div>
+        <h4>Hadiah Fisik</h4>
 
-  <button class="btn-hadiah" onclick="salinAlamat()">
-    📍 Salin Alamat
-  </button>
+        <div class="alamat-box" id="alamatHadiah">
+        RT 03/RW 07, Desa Alamendah, Kec. Rancabali (Ciwidey), 
+          Kab. Bandung, Jawa Barat 40973.
+        </div>
 
-</div>
+        <button class="btn-hadiah" onclick="salinAlamat()">
+          📍 Salin Alamat
+        </button>
 
-    
-
-</div>
       </div>
+
     </div>
 
   </div>
 </section>
-</section>
-
 <!-- ==========================================
 8. CLOSING
 ========================================== -->
@@ -1689,23 +837,23 @@ NAVIGASI BAWAH
 <div class="bottom-nav">
 
 <a href="#cover">
-<img src="home.svg">
+<img src="ikon-undangan/home.svg">
 </a>
 
 <a href="#pengantin">
-<img src="heart.svg">
+<img src="ikon-undangan/heart.svg">
 </a>
 
 <a href="#acara">
-<img src="calendar.svg">
+<img src="ikon-undangan/calendar.svg">
 </a>
 
 <a href="#gift">
-<img src="gift.svg">
+<img src="ikon-undangan/gift.svg">
 </a>
 
 <a href="#closing">
-<img src="close.svg">
+<img src="ikon-undangan/close.svg">
 </a>
 
 </div>
@@ -1732,12 +880,10 @@ decodeURIComponent(tamu);
 /* ==========================================
 BUKA UNDANGAN
 ========================================== */
-
 function bukaUndangan(){
-
-document.getElementById("opening")
-.scrollIntoView();
-
+  music.play();
+  musicBtn.innerText="❚❚ Musik";
+  document.getElementById("opening").scrollIntoView({behavior:"smooth"});
 }
 
 /* ==========================================
@@ -1748,23 +894,22 @@ const music=document.getElementById("bgMusic");
 
 const musicBtn=document.getElementById("musicBtn");
 
-musicBtn.onclick=()=>{
-
-if(music.paused){
-
-music.play();
-
-musicBtn.innerText="❚❚ Musik";
-
-}else{
-
-music.pause();
-
-musicBtn.innerText="▶ Musik";
-
-}
-
+musicBtn.onclick = () => {
+  if(music.paused){
+    music.play();
+    musicBtn.classList.remove("paused");
+  }else{
+    music.pause();
+    musicBtn.classList.add("paused");
+  }
 };
+
+function bukaUndangan(){
+  music.play();
+  musicBtn.classList.remove("paused");
+  document.getElementById("opening")
+    .scrollIntoView({behavior:"smooth"});
+}
 
 /* ==========================================
 COUNTDOWN
@@ -1830,53 +975,15 @@ RSVP
 CONTOH GOOGLE APPS SCRIPT
 ========================================== */
 
-document.getElementById("rsvpForm")
-.addEventListener("submit",async function(e){
-
-e.preventDefault();
-
-const data={
-
-nama:this[0].value,
-kehadiran:this[1].value,
-jumlah:this[2].value,
-ucapan:this[3].value
-
-};
-
-/*
-Ganti URL berikut dengan URL
-Google Apps Script milikmu.
-*/
-
-const GAS_URL=
-"https://script.google.com/macros/s/ISI_URL_DISINI/exec";
-
-/*
-Contoh kirim data:
-
-await fetch(GAS_URL,{
-method:"POST",
-body:JSON.stringify(data)
-});
-
-*/
-
-alert("Struktur RSVP sudah siap.");
-
-this.reset();
-
-});
-
 function bukaRekening(){
     const isi=document.getElementById("rekening");
     isi.style.display=isi.style.display==="block" ? "none" : "block";
 }
 
-function salinRekening(id){
-    const nomor=document.getElementById(id).innerText;
-    navigator.clipboard.writeText(nomor);
-    alert("Nomor rekening berhasil disalin.");
+function salinRekening(){
+  const nomor=document.getElementById("nomorRek").innerText;
+  navigator.clipboard.writeText(nomor);
+  alert("Nomor rekening berhasil disalin.");
 }
 
 function salinAlamat(){
@@ -1884,8 +991,13 @@ function salinAlamat(){
   navigator.clipboard.writeText(alamat);
   alert("Alamat berhasil disalin.");
 }
-</script>
+
+
+/* ==========================================
+   RSVP
+========================================== */
+
 </script>
 
 </body>
-</html>
+</html
